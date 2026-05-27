@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
 import { createClient } from "@supabase/supabase-js";
 
-const supabase = createClient(import.meta.env.VITE_SUPABASE_URL, import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY);
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+const supabaseKey = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY;
+
+const supabase = createClient(supabaseUrl, supabaseKey);
 
 function App() {
   const [instruments, setInstruments] = useState([]);
@@ -23,8 +26,8 @@ function App() {
 
   return (
       <ul>
-        {instruments.map((instrument) => (
-            <li key={instrument.name}>{instrument.name}</li>
+        {instruments.map((item) => (
+            <li key={item.name}>{item.name}</li>
         ))}
       </ul>
   );
