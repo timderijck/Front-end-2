@@ -8,6 +8,9 @@ function Login() {
             <input type="password" placeholder="Wachtwoord"/>
             <br/>
             <button>Inloggen</button>
+            <br/>
+            <a href="/register" >Nog geen account? maak er een aan.</a>
+
         </div>
     );
 }
