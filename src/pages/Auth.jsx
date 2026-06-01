@@ -109,7 +109,7 @@ export default function Auth({ mode = 'login' }) {
               {/* <a href="/forgot">Wachtwoord vergeten?</a> */}
             </>
           )}
-          {mode === 'register' && <a href="/login">Al een account? Log hier in</a>}
+          {mode === 'register' && <a href="/src/pages/Login">Al een account? Log hier in</a>}
           {/* {mode === 'forgot' && <a href="/login">Terug naar inloggen</a>} */}
         </div>
       </div>
