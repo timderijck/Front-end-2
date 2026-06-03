@@ -4,6 +4,7 @@ import Login from "./pages/Login.jsx";
 import Register from "./components/register.jsx";
 import {  Routes, Route } from "react-router";
 import { supabase } from './supabase.js';
+import Header from './components/Header';
 
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
   //   }, []);
   return (
       <>
+          <Header />
           <Routes>
             <Route
                 exact
