@@ -1,47 +1,51 @@
 import { useEffect, useState } from "react";
-import { createClient } from "@supabase/supabase-js";
 import Home from "./pages/Home.jsx";
 import Login from "./pages/Login.jsx";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Register from "./components/register.jsx";
+import {  Routes, Route } from "react-router";
+import { supabase } from './supabase.js';
+import Header from './components/Header';
 
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
-const supabaseKey = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY;
-
-const supabase = createClient(supabaseUrl, supabaseKey);
 
 function App() {
-  const [instruments, setInstruments] = useState([]);
+  const [instruments,    setInstruments] = useState([]);
 
-  useEffect(() => {
-    getInstruments();
-  }, []);
 
-  async function getInstruments() {
-    const {data, error} = await supabase.from("instruments").select();
 
-    if (error) {
-      console.error(error);
-      return;
-    }
-
-    setInstruments(data);
-  }
-
+  // async function getInstruments() {
+  //   const {data, error} = await supabase.from("instruments").select();
+  //
+  //
+  //   if (error) {
+  //     console.error(error);
+  //     return;
+  //   }
+  //
+  //   setInstruments(data);
+  // }
+  //   useEffect(() => {
+  //       getInstruments();
+  //   }, []);
   return (
       <>
-        <Router>
+          <Header />
           <Routes>
             <Route
                 exact
                 path="/"
-                element={<App/>}
-            />
-            <Route
-                path="/login"
                 element={<Login/>}
             />
+            <Route
+                path="/home"
+                element={<Home/>}
+            />
+              <Route
+              path="/register"
+              element={<Register/>}/>
+              <Route
+                  path="/login"
+                  element={<Login/>}/>
           </Routes>
-        </Router>
         <ul>
           {instruments.map((item) => (
               <li key={item.name}>{item.name}</li>
