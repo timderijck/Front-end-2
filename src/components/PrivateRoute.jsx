@@ -13,7 +13,7 @@ export default function PrivateRoute({ children }) {
   if (loading) return null;
 
   // Niet ingelogd? Stuur door naar de loginpagina
-  if (!session) return <Navigate to="/login" />;
+  if (!session) return <Navigate to="/" />;
 
   // Wel ingelogd? Toon de gewenste pagina
   return children;
