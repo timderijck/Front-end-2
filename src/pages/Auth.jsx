@@ -20,7 +20,7 @@ export default function Auth({ mode = 'login' }) {
   // Als de gebruiker al is ingelogd, stuur hem door naar de homepage
   const { session, loading: sessionLoading } = useSession();
   if (sessionLoading) return null;
-  if (session) return <Navigate to="/" />;
+  if (session && !loading) return <Navigate to="/" />;
 
   const handleSubmit = async (e) => {
     e.preventDefault();

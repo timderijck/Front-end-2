@@ -5,6 +5,8 @@ import Register from "./components/register.jsx";
 import {  Routes, Route } from "react-router";
 import { supabase } from './supabase.js';
 import Header from './components/Header';
+import Posts from './pages/Posts';
+import PrivateRoute from './components/PrivateRoute';
 
 
 function App() {
@@ -35,16 +37,34 @@ function App() {
                 path="/"
                 element={<Login/>}
             />
-            <Route
-                path="/home"
-                element={<Home/>}
-            />
+              <Route
+                  path="/home"
+                  element={
+                      <PrivateRoute>
+                          <Home/>
+                      </PrivateRoute>
+                  }
+              />
               <Route
               path="/register"
               element={<Register/>}/>
               <Route
                   path="/login"
-                  element={<Login/>}/>
+                  element={
+                  <PrivateRoute>
+                    <Login/>
+                  </PrivateRoute>
+                  }
+                  />
+              <Route
+                  path="/posts"
+                  element={
+                      <PrivateRoute>
+                          <Posts />
+                      </PrivateRoute>
+                  }
+              />
+
           </Routes>
         <ul>
           {instruments.map((item) => (
