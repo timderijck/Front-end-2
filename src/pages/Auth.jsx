@@ -37,9 +37,14 @@ export default function Auth({ mode = 'login' }) {
 
     if (mode === 'register') {
       // Nieuw account aanmaken
-      const { error } = await supabase.auth.signUp({ email, password });
-      if (error) setError(error.message);
-      else setMessage('Account aangemaakt! Je kunt nu inloggen.');
+      const { data, error } = await supabase.auth.signUp({ email, password });
+      if (error) {
+        setError(error.message);
+      } else {
+        const username = `user_${data.user.id.slice(0, 8)}`;
+        await supabase.from("profiles").insert({ user_id: data.user.id, username: username, });
+        navigate('/profile');
+      }
     }
 
     // Wachtwoord vergeten functionaliteit is voorlopig uitgezet, maar hier is hoe het zou werken:
