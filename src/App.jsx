@@ -7,6 +7,9 @@ import { supabase } from './supabase.js';
 import Header from './components/Header';
 import Posts from './pages/Posts';
 import PrivateRoute from './components/PrivateRoute';
+import Profile from './pages/Profile';
+import PublicProfile from './pages/Profile';
+
 
 
 function App() {
@@ -32,6 +35,11 @@ function App() {
       <>
           <Header />
           <Routes>
+
+              {/*profile pages*/}
+              <Route path="/profile" element={<PrivateRoute><Profile /></PrivateRoute>} />
+              <Route path="/profile/:id" element={<PrivateRoute><PublicProfile /></PrivateRoute>} />
+
             <Route
                 exact
                 path="/"
