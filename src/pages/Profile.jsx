@@ -12,26 +12,62 @@ export default function ProfilePage() {
     const [saving, setSaving] = useState(false);
     const [message, setMessage] = useState('');
 
+    async function fetchProfile() {
+        const { data } = await supabase
+            .from("Profiles")
+            .select('*')
+            .eq('user_id', session.sub)
+            .single();
+
+        if (data) {
+            setProfile(data);
+            setUsername(data.Username ?? '');
+            setBio(data.Bio ?? '');
+            setIsprivate(data.is_private ?? false);
+        }
+    }
     useEffect(() => {
         if (!session) return;
 
-        async function fetchProfile() {
-            const { data } = await supabase
-                .from("Profiles")
-                .select('*')
-                .eq('user_id', session.sub)
-                .single();
-
-            if (data) {
-                setProfile(data);
-                setUsername(data.Username ?? '');
-                setBio(data.Bio ?? '');
-                setIsprivate(data.is_private ?? false);
-            }
-        }
-
         fetchProfile();
     }, [session]);
+
+
+    async function updateProfile() {
+        const {error} = await supabase
+            .from("Profiles")
+            .update({username, bio, is_private: isprivate})
+            .eq('user_id', session.sub);
+
+        if (!error) fetchProfile();
+    }
+    async function ProfielFoto(e) {
+        const image = e.target.files[0];
+        if (!image) return;
+
+        const fileName = `${session.sub}-${Date.now()}`;
+
+        const {error} = await supabase.storage
+        .from("avatars")
+            .upload(fileName, image);
+
+        if (error) {
+            setMessage ('Upload mislukt: ' + error.message);
+            return;
+        }
+        const { data } = supabase.storage
+            .from('avatars')
+            .getPublicUrl(fileName);
+
+        await supabase
+            .from('Profiles')
+            .update({ avatar_url: data.publicUrl })
+            .eq('user_id', session.sub);
+
+        await fetchProfile();
+        setMessage('Profielfoto bijgewerkt!');
+    }
+
 
     async function handleSave() {
         setSaving(true);
@@ -64,8 +100,13 @@ export default function ProfilePage() {
             <p>{profile.Bio || 'Geen bio ingesteld.'}</p>
             <p>Profiel: {profile.is_private ? 'Privé' : 'Openbaar'}</p>
 
+
+            {profile.avatar_url && <img src={profile.avatar_url} alt="avatar" width={80} />}
+            <input type="file" accept="image/*" onChange={ProfielFoto} />
+
+
             {!editing ? (
-                <button onClick={() => setEditing(true)}>Bewerken</button>
+                <button onClick={() => { updateProfile(); setEditing(true); }}>Bewerken</button>
             ) : (
                 <div>
                     <div>

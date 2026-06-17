@@ -42,7 +42,7 @@ export default function Auth({ mode = 'login' }) {
         setError(error.message);
       } else {
         const username = `user_${data.user.id.slice(0, 8)}`;
-        await supabase.from("profiles").insert({ user_id: data.user.id, username: username, });
+        await supabase.from("Profiles").insert({ user_id: data.user.id, Username: username, });
         navigate('/profile');
       }
     }
@@ -57,6 +57,7 @@ export default function Auth({ mode = 'login' }) {
 
     setLoading(false);
   };
+
 
   return (
     <div className="auth-container">
