@@ -38,7 +38,7 @@ function Header() {
                 <div>
                     <span>{profile?.Username ?? session.email}</span>
                     {profile?.avatar_url ? (
-                        <img src={profile.avatar_url} alt="avatar" />
+                        <img src={profile.avatar_url} alt="avatar" style={{ width: 32, height: 32, borderRadius: '50%' }} />
                     ) : (
                         <div>{session.email?.[0].toUpperCase()}</div>
                     )}
