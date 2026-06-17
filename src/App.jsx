@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Home from "./pages/Home.jsx";
-import Login from "./pages/Login.jsx";
+import Login from "./pages/auth.jsx";
 import Register from "./components/register.jsx";
 import {  Routes, Route } from "react-router";
 import { supabase } from './supabase.js';
@@ -8,7 +8,7 @@ import Header from './components/Header';
 import Posts from './pages/Posts';
 import PrivateRoute from './components/PrivateRoute';
 import Profile from './pages/Profile';
-import PublicProfile from './pages/Profile';
+import PublicProfile from './pages/PublicProfile.jsx';
 
 
 
