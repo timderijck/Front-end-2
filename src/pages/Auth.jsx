@@ -32,7 +32,7 @@ export default function Auth({ mode = 'login' }) {
       // Inloggen met e-mail en wachtwoord
       const { error } = await supabase.auth.signInWithPassword({ email, password });
       if (error) setError(error.message);
-      else navigate('/');
+      else navigate('/Home');
     }
 
     if (mode === 'register') {

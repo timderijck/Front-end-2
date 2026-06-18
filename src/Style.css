@@ -1,0 +1,59 @@
+/* Home.css */
+.home-wrapper {
+    display: flex;
+    gap: 2rem;
+    padding: 2rem;
+}
+
+.home-main {
+    flex: 1;
+}
+
+.home-sidebar {
+    width: 240px;
+    flex-shrink: 0;
+}
+
+.home-sidebar h3 {
+    margin-bottom: 1rem;
+    font-size: 1rem;
+}
+
+.home-userlist {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.home-userlink {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    color: inherit;
+}
+
+.home-avatar,
+.home-avatar-placeholder {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.home-avatar-placeholder {
+    background: #333;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+}
+
+.header-nav {
+    display: flex;
+    justify-content: center;
+}
