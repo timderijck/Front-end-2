@@ -2,6 +2,8 @@ import { useSession } from '../hooks/useSession';
 import { supabase } from '../supabase';
 import { useNavigate } from 'react-router';
 import { useEffect, useState } from 'react';
+import '../Style.css';
+
 
 function Header() {
     const { session } = useSession();
@@ -43,6 +45,10 @@ function Header() {
                         <div>{session.email?.[0].toUpperCase()}</div>
                     )}
                     <button onClick={handleLogout}>Uitloggen</button>
+                    <nav className="header-nav">
+                        <a href="/home">Home</a>
+                        <a href="/profile">Profiel</a>
+                    </nav>
                 </div>
             )}
         </header>
